@@ -9,10 +9,7 @@ import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
 
-public class EnemyControlSystem implements IEntityProcessingService {
-
-    private float totalTime = 0f;
-
+public class BulletControlSystem implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
         for (Entity enemy : world.getEntities(Enemy.class)) {
