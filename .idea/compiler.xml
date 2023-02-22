@@ -74,7 +74,7 @@
       <module name="Asteroid (3)" target="1.8" />
       <module name="asteroids.java9" target="9" />
       <module name="asteroids.serviceloader" target="1.8" />
-      <module name="AsteroidsEntityFramework" target="1.8" />
+      <module name="AsteroidsEntityFramework" target="11" />
       <module name="AsteroidsLibGDX" target="11" />
       <module name="AsteroidsNetbeansModules-app" target="1.8" />
       <module name="AsteroidsNetbeansModules-branding" target="1.8" />
@@ -83,8 +83,12 @@
       <module name="Collision" target="9" />
       <module name="Collision (1)" target="9" />
       <module name="Collision (2)" target="1.8" />
+<<<<<<< HEAD
       <module name="Collision (3)" target="1.8" />
       <module name="Common" target="1.8" />
+=======
+      <module name="Common" target="11" />
+>>>>>>> 842213e963960a9b4465b00de0624c683d22faf8
       <module name="common" target="9" />
       <module name="common (1)" target="9" />
       <module name="Common (1)" target="1.8" />
@@ -103,7 +107,7 @@
       <module name="Core (4)" target="1.8" />
       <module name="DictionaryDemo" target="1.8" />
       <module name="DictionaryServiceProvider" target="1.8" />
-      <module name="Enemy" target="1.8" />
+      <module name="Enemy" target="11" />
       <module name="Enemy (1)" target="1.8" />
       <module name="Enemy (2)" target="1.8" />
       <module name="ExtendedDictionary" target="1.8" />
@@ -123,7 +127,7 @@
       <module name="OSGiLaser" target="1.8" />
       <module name="OSGiLibGDX" target="1.8" />
       <module name="PaxAteroids" target="1.8" />
-      <module name="Player" target="1.8" />
+      <module name="Player" target="11" />
       <module name="player" target="9" />
       <module name="Player (1)" target="1.8" />
       <module name="player (1)" target="9" />

@@ -76,7 +76,7 @@ public class Player extends SpaceObject {
         flamey[1] = y + MathUtils.sin(radians - pi) * (6 + acceleratingTimer * 50);
 
         flamex[2] = x + MathUtils.cos(radians + 5 * pi / 6) * 5;
-        flamey[2] = y + MathUtils.cos(radians + 5 * pi / 6) * 5;
+        flamey[2] = y + MathUtils.sin(radians + 5 * pi / 6) * 5;
     }
 
     public void setLeft(boolean b) {
