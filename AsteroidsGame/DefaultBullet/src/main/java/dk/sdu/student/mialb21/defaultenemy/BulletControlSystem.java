@@ -1,6 +1,5 @@
 package dk.sdu.student.mialb21.defaultenemy;
 
-import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.GameKeys;
@@ -12,23 +11,9 @@ import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
 public class BulletControlSystem implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
-        for (Entity enemy : world.getEntities(Enemy.class)) {
+        for (Entity enemy : world.getEntities(Bullet.class)) {
             PositionPart positionPart = enemy.getPart(PositionPart.class);
             MovingPart movingPart = enemy.getPart(MovingPart.class);
-            this.totalTime = (this.totalTime + gameData.getDelta()) % 100;
-
-            float controlRotateAmplifier = MathUtils.random(0.1f,2f);
-            float controlGeneralAmplifier = MathUtils.random(0.1f,2f);
-
-            movingPart.setLeft(
-                    (MathUtils.sin(totalTime * controlRotateAmplifier + MathUtils.random(0f, 2f)) * controlGeneralAmplifier) < MathUtils.random(-0.3f, -controlGeneralAmplifier)
-            );
-            movingPart.setRight(
-                    (MathUtils.sin(totalTime * controlRotateAmplifier + MathUtils.random(0f, 2f)) * controlGeneralAmplifier) > MathUtils.random(0.8f, controlGeneralAmplifier)
-            );
-            movingPart.setUp(
-                    MathUtils.random(0.01f, 1f) > MathUtils.random(0.5f, 1f)
-            );
 
             movingPart.process(gameData, enemy);
             positionPart.process(gameData, enemy);

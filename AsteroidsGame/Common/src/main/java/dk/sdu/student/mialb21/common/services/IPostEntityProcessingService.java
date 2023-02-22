@@ -13,8 +13,14 @@ public interface IPostEntityProcessingService  {
          * Process entity after all ordinary processing.
          * This can be for collision detection or similar elements, that needs to be processed after all entities has been processed.
          *
+         * Precondition: A game tick has passed since last call and all entities has been processed.
+         * Postcondition: The entity has been processed and updated.
+         * 
          * @param gameData Data for the game
          * @param world World of the game
+         * 
+         * @see GameData
+         * @see World
          */
         void process(GameData gameData, World world);
 }

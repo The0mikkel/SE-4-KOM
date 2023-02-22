@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import dk.sdu.student.mialb21.common.data.Color;
 import dk.sdu.student.mialb21.defaultenemy.EnemyControlSystem;
 import dk.sdu.student.mialb21.defaultenemy.EnemyPlugin;
 import dk.sdu.student.mialb21.defaultplayer.PlayerControlSystem;
@@ -90,7 +91,8 @@ public class Game
     private void draw() {
         for (Entity entity : world.getEntities()) {
 
-            sr.setColor(1, 1, 1, 1);
+            Color color = entity.getColor();
+            sr.setColor(color.getR(), color.getG(), color.getB(), color.getA());
 
             sr.begin(ShapeRenderer.ShapeType.Line);
 

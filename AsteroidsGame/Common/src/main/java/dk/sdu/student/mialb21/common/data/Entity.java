@@ -13,10 +13,12 @@ public class Entity implements Serializable {
     private float[] shapeX = new float[4];
     private float[] shapeY = new float[4];
     private float radius;
+    private Color color;
     private Map<Class, EntityPart> parts;
     
     public Entity() {
         parts = new ConcurrentHashMap<>();
+        color = new Color(1,1,1,1);
     }
     
     public void add(EntityPart part) {
@@ -57,5 +59,13 @@ public class Entity implements Serializable {
 
     public void setShapeY(float[] shapeY) {
         this.shapeY = shapeY;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

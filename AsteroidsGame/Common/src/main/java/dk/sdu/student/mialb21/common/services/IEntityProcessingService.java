@@ -8,10 +8,16 @@ import dk.sdu.student.mialb21.common.data.World;
  */
 public interface IEntityProcessingService {
     /**
-     * Process the entity
+     * Process the entity.
      *
+     * Precondition: A game tick has passed since last call.
+     * Postcondition: The entity has been processed and updated.
+     * 
      * @param gameData Data for the game
      * @param world World of the game
+     *
+     * @see GameData
+     * @see World
      */
     void process(GameData gameData, World world);
 }
