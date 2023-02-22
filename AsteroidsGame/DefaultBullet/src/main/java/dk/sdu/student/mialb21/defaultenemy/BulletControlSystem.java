@@ -4,6 +4,7 @@ import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.GameKeys;
 import dk.sdu.student.mialb21.common.data.World;
+import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
@@ -11,51 +12,40 @@ import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
 public class BulletControlSystem implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
-        for (Entity enemy : world.getEntities(Bullet.class)) {
-            PositionPart positionPart = enemy.getPart(PositionPart.class);
-            MovingPart movingPart = enemy.getPart(MovingPart.class);
+        for (Entity bullet : world.getEntities(Bullet.class)) {
+            PositionPart positionPart = bullet.getPart(PositionPart.class);
+            MovingPart movingPart = bullet.getPart(MovingPart.class);
+            LifePart lifePart = bullet.getPart(LifePart.class);
 
-            movingPart.process(gameData, enemy);
-            positionPart.process(gameData, enemy);
+            movingPart.process(gameData, bullet);
+            positionPart.process(gameData, bullet);
+            lifePart.reduceExpiration(gameData.getDelta());
+            lifePart.process(gameData, bullet);
 
-            updateShape(enemy);
+            updateShape(bullet);
+
+            if (lifePart.getExpiration() <= 0) {
+                world.removeEntity(bullet);
+            }
         }
     }
 
     private void updateShape(Entity entity) {
-        float[] shapex = entity.getShapeX();
-        float[] shapey = entity.getShapeY();
+        float[] shapeX = entity.getShapeX();
+        float[] shapeY = entity.getShapeY();
         PositionPart positionPart = entity.getPart(PositionPart.class);
         float x = positionPart.getX();
         float y = positionPart.getY();
-        float radians = (float) (Math.PI / 2f);
+        float radians = positionPart.getRadians();
 
-        float[] points = new float[7];
-        points[0] = 1;
-        points[1] = 2;
-        points[2] = 2.2f;
-        points[3] = 2.5f;
-        points[4] = 2.8f;
-        points[5] = 3;
-        points[6] = 4;
+        shapeX[0] = (float) ((x + Math.cos(radians))*2);
+        shapeY[0] = (float) ((y + Math.sin(radians))*2);
 
-        float[] distance = new float[7];
-        distance[0] = distance[1] = distance[2] = 10;
-        distance[3] = 15;
-        distance[4] = distance[5] = distance[6] = 10;
+        shapeX[1] = (float) ((x - Math.cos(radians))*2);
+        shapeY[1] = (float) ((y - Math.sin(radians))*2);
 
-        for (int i = 0; i < 7; i++) {
-            shapex[i] = (float) (x + Math.cos(radians + Math.PI * (points[i] / 5)) * distance[i]);
-            shapey[i] = (float) (y + Math.sin(radians + Math.PI * (points[i] / 5)) * distance[i]);
-        }
-
-        for (int i = 0; i < 7; i++) {
-            shapex[i + 7] = (float) (x - Math.cos(radians + Math.PI * points[i] / 5) * distance[i]);
-            shapey[i + 7] = (float) (y - Math.sin(radians + Math.PI * points[i] / 5) * distance[i]);
-        }
-
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
+        entity.setShapeX(shapeX);
+        entity.setShapeY(shapeY);
     }
 }
 

@@ -39,7 +39,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.setShapeX(new float[14]);
         enemyShip.setShapeY(new float[14]);
         enemyShip.setColor(new Color(1,0,0,1));
-        enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
+        enemyShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed, 0));
         enemyShip.add(new PositionPart(x, y, radians));
 
         return enemyShip;

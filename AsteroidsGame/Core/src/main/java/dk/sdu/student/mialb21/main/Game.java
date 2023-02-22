@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.student.mialb21.common.data.Color;
-import dk.sdu.student.mialb21.defaultenemy.EnemyControlSystem;
-import dk.sdu.student.mialb21.defaultenemy.EnemyPlugin;
+import dk.sdu.student.mialb21.common.data.entityparts.EntityPart;
+import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
+import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
+import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
+import dk.sdu.student.mialb21.defaultenemy.*;
 import dk.sdu.student.mialb21.defaultplayer.PlayerControlSystem;
 import dk.sdu.student.mialb21.defaultplayer.PlayerPlugin;
 import dk.sdu.student.mialb21.managers.GameInputProcessor;
@@ -59,6 +62,10 @@ public class Game
         entityPlugins.add(enemyPlugin);
         entityProcessors.add(enemyProcess);
 
+        // Bullet controller
+        IEntityProcessingService bulletProcess = new BulletControlSystem();
+        entityProcessors.add(bulletProcess);
+
         // Lookup all Game Plugins using ServiceLoader
         for (IGamePluginService iGamePlugin : entityPlugins) {
             iGamePlugin.start(gameData, world);
@@ -82,6 +89,29 @@ public class Game
     }
 
     private void update() {
+        // Bullet
+        for (Entity entity : world.getEntities()) {
+            try {
+                ShootingPart shootingPart = entity.getPart(ShootingPart.class);
+
+                if (shootingPart.getShooting()) {
+                    PositionPart positionPart = entity.getPart(PositionPart.class);
+                    MovingPart movingPart = entity.getPart(MovingPart.class);
+
+                    IGamePluginService bulletPlugin = new BulletPlugin(
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            movingPart.getSpeed(entity)
+                    );
+                    entityPlugins.add(bulletPlugin);
+                    bulletPlugin.start(gameData, world);
+                }
+            } catch (NullPointerException error) {
+//                System.out.println("Shooting part not found");
+            }
+        }
+
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessors) {
             entityProcessorService.process(gameData, world);
