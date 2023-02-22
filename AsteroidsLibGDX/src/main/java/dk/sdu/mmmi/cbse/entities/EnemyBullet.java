@@ -8,8 +8,8 @@ import java.util.Iterator;
 
 public class EnemyBullet extends Bullet {
 
-    public EnemyBullet(float x, float y, float radians) {
-        super(x, y, radians);
+    public EnemyBullet(float speed, float x, float y, float radians) {
+        super(speed, x, y, radians);
 
         this.color = new float[]{1, 0, 0, 1};
     }

@@ -112,7 +112,7 @@ public class Player extends SpaceObject {
     }
 
     protected void addShot() {
-        this.bullets.add(new Bullet(x, y, radians));
+        this.bullets.add(new Bullet(this.speed, x, y, radians));
     }
 
     public void update(float dt) {

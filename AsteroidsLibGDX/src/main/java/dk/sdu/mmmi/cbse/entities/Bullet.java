@@ -14,14 +14,14 @@ public class Bullet extends SpaceObject {
 
     private float deceleration;
 
-    public Bullet(float x, float y, float radians) {
+    public Bullet(float speed, float x, float y, float radians) {
         this.x = x;
         this.y = y;
         this.radians = radians;
 
-        float speed = 350;
-        dx = MathUtils.cos(radians) * speed;
-        dy = MathUtils.sin(radians) * speed;
+        float totalSpeed = 50 + speed;
+        dx = MathUtils.cos(radians) * totalSpeed;
+        dy = MathUtils.sin(radians) * totalSpeed;
 
         width = height = 2;
 

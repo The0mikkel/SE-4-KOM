@@ -31,7 +31,7 @@ public class EnemyPlayer extends Player {
     }
 
     protected void addShot() {
-        this.bullets.add(new EnemyBullet(x, y, radians));
+        this.bullets.add(new EnemyBullet(this.speed, x, y, radians));
     }
 
     public void update(float dt) {
