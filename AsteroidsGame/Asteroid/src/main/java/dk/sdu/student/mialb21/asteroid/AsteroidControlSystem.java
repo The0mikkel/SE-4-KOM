@@ -8,6 +8,9 @@ import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
 
+/**
+ * Asteroid control system, that control the movement and behavior of all asteroids.
+ */
 public class AsteroidControlSystem implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
@@ -30,6 +33,16 @@ public class AsteroidControlSystem implements IEntityProcessingService {
         }
     }
 
+    /**
+     * Handle asteroid splitting, by checking if it is needing, and doing if it is.
+     * <br>
+     * Pre-condition: Asteroid is present in the game board, and that the asteroid has life part. <br />
+     * post-condition: If the asteroid is not in splitting stage, nothing is done, else splittet asteroids are created.
+     *
+     * @param gameData Data for the game
+     * @param world World of the game
+     * @param asteroid The asteroid that needs to be checked and handled
+     */
     private void handleAsteroidSplitting(GameData gameData, World world, Entity asteroid) {
         // Get parts
         LifePart lifePart = asteroid.getPart(LifePart.class);
@@ -46,6 +59,14 @@ public class AsteroidControlSystem implements IEntityProcessingService {
         return;
     }
 
+    /**
+     * Update the shape of entity
+     * <br />
+     * Pre-condition: An entity that can be drawn, and a game tick has passed since last call for entity <br />
+     * Post-condition: Updated shape location for the entity
+     *
+     * @param entity Entity to update shape of
+     */
     private void updateShape(Entity entity) {
         float[] shapeX = entity.getShapeX();
         float[] shapeY = entity.getShapeY();

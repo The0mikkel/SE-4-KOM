@@ -23,11 +23,20 @@ public class EnemyPlugin implements IGamePluginService {
     public void start(GameData gameData, World world) {
 
         // Add entities to the world
-        enemy = createPlayerShip(gameData);
+        enemy = createEnemyShip(gameData);
         world.addEntity(enemy);
     }
 
-    private Entity createPlayerShip(GameData gameData) {
+    /**
+     * Create enemy ship entity with default data and parts
+     * <br />
+     * Pre-condition: New enemy entity has to be created for the game <br />
+     * Post-condition: Enemy entity, that has default parameters and parts
+     *
+     * @param gameData Data for the game
+     * @return Enemy entity with default parameters and parts
+     */
+    private Entity createEnemyShip(GameData gameData) {
 
         float deacceleration = 10;
         float acceleration = 200;

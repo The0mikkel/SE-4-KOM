@@ -9,9 +9,9 @@ import dk.sdu.student.mialb21.common.data.World;
 public interface IGamePluginService {
     /**
      * Start the plugin.
-     * 
-     * Precondition: The game is starting and the plugin has not yet been started.
-     * Postcondition: The plugin has been started and entities have been added to the world.
+     * <br />
+     * Pre-condition: The game is starting and the plugin has not yet been started.<br />
+     * Post-condition: The plugin has been started and entities have been added to the world.
      *
      * @param gameData Data for the game
      * @param world World of the game
@@ -23,9 +23,9 @@ public interface IGamePluginService {
 
     /**
      * Stop the plugin.
-     *
-     * Precondition: The game is stopping and the plugin has not yet been stopped.
-     * Postcondition: The plugin has been stopped and entities have been removed from the world.
+     * <br />
+     * Pre-condition: The game is stopping and the plugin has not yet been stopped.<br />
+     * Post-condition: The plugin has been stopped and entities have been removed from the world.
      * 
      * @param gameData Data for the game
      * @param world World of the game

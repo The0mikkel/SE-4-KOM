@@ -25,6 +25,15 @@ public class BulletPlugin implements IGamePluginService {
         world.addEntity(bullet);
     }
 
+    /**
+     * Create bullet entity with default parameters based on shooter
+     * <br />
+     * Pre-condition: New bullet entity has to be created for the game from a shooter <br />
+     * Post-condition: Bullet entity, that has parameters, such that it is shot from shooter
+     *
+     * @param gameData Data for the game
+     * @return Bullet entity with initial data from shooter
+     */
     private Entity createBullet(GameData gameData) {
         PositionPart shooterPosition = this.shooter.getPart(PositionPart.class);
         MovingPart shooterMovement = this.shooter.getPart(MovingPart.class);

@@ -38,6 +38,14 @@ public class PlayerControlSystem implements IEntityProcessingService {
         }
     }
 
+    /**
+     * Update the shape of entity
+     * <br />
+     * Pre-condition: An entity that can be drawn, and a game tick has passed since last call for entity <br />
+     * Post-condition: Updated shape location for the entity
+     *
+     * @param entity Entity to update shape of
+     */
     private void updateShape(Entity entity) {
         float[] shapex = entity.getShapeX();
         float[] shapey = entity.getShapeY();
