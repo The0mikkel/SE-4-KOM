@@ -3,6 +3,7 @@ package dk.sdu.student.mialb21.defaultplayer;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.World;
+import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
@@ -35,9 +36,13 @@ public class PlayerPlugin implements IGamePluginService {
         float radians = 3.1415f / 2;
 
         Entity playerShip = new Player();
-        playerShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed, 300));
+
+        playerShip.setRadius(8);
+
+        playerShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed, 0));
         playerShip.add(new PositionPart(x, y, radians));
-        playerShip.add(new ShootingPart(0.5f));
+        playerShip.add(new LifePart(1, 0));
+        playerShip.add(new ShootingPart(0.2f));
 
         return playerShip;
     }

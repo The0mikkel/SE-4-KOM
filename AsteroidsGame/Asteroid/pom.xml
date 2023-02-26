@@ -6,7 +6,7 @@
         <artifactId>AsteroidsGame</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>DefaultBullet</artifactId>
+    <artifactId>Asteroid</artifactId>
     <packaging>jar</packaging>
 
     <build>

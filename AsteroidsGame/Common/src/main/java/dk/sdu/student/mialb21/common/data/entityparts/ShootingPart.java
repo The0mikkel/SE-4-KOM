@@ -6,7 +6,6 @@ import dk.sdu.student.mialb21.common.data.GameData;
 public class ShootingPart implements  EntityPart {
     private float cooldownTime;
     private float cooldown;
-
     private boolean shooting;
 
     private String bulletClass;

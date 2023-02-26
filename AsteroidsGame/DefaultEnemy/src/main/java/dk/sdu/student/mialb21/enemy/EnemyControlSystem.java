@@ -1,11 +1,14 @@
-package dk.sdu.student.mialb21.defaultenemy;
+package dk.sdu.student.mialb21.enemy;
 
 import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
+import dk.sdu.student.mialb21.common.data.GameKeys;
 import dk.sdu.student.mialb21.common.data.World;
+import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
+import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
 
 public class EnemyControlSystem implements IEntityProcessingService {
@@ -17,6 +20,9 @@ public class EnemyControlSystem implements IEntityProcessingService {
         for (Entity enemy : world.getEntities(Enemy.class)) {
             PositionPart positionPart = enemy.getPart(PositionPart.class);
             MovingPart movingPart = enemy.getPart(MovingPart.class);
+            ShootingPart shootingPart = enemy.getPart(ShootingPart.class);
+            LifePart lifePart = enemy.getPart(LifePart.class);
+
             this.totalTime = (this.totalTime + gameData.getDelta()) % 100;
 
             float controlRotateAmplifier = MathUtils.random(0.1f,2f);
@@ -34,6 +40,14 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
             movingPart.process(gameData, enemy);
             positionPart.process(gameData, enemy);
+            shootingPart.process(gameData, enemy);
+            lifePart.process(gameData, enemy);
+
+            shootingPart.setShooting(MathUtils.random(0f,1f) > 0.99f);
+
+            if (lifePart.isDead()) {
+                world.removeEntity(enemy);
+            }
 
             updateShape(enemy);
         }

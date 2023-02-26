@@ -4,6 +4,7 @@ import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.GameKeys;
 import dk.sdu.student.mialb21.common.data.World;
+import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
@@ -16,6 +17,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
             PositionPart positionPart = player.getPart(PositionPart.class);
             MovingPart movingPart = player.getPart(MovingPart.class);
             ShootingPart shootingPart = player.getPart(ShootingPart.class);
+            LifePart lifePart = player.getPart(LifePart.class);
 
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
             movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
@@ -24,8 +26,13 @@ public class PlayerControlSystem implements IEntityProcessingService {
             movingPart.process(gameData, player);
             positionPart.process(gameData, player);
             shootingPart.process(gameData, player);
+            lifePart.process(gameData, player);
 
             shootingPart.setShooting(gameData.getKeys().isDown(GameKeys.SPACE));
+
+            if (lifePart.isDead()) {
+                world.removeEntity(player);
+            }
 
             updateShape(player);
         }

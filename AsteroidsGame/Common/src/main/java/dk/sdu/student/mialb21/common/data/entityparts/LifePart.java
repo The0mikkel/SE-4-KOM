@@ -15,12 +15,14 @@ import dk.sdu.student.mialb21.common.data.Entity;
 public class LifePart implements EntityPart {
 
     private int life;
-    private boolean isHit = false;
+    private boolean isHit, dead;
     private float expiration;
 
     public LifePart(int life, float expiration) {
         this.life = life;
         this.expiration = expiration;
+        this.isHit = false;
+        this.dead = false;
     }
 
     public int getLife() {
@@ -43,6 +45,10 @@ public class LifePart implements EntityPart {
         return expiration;
     }
 
+    public boolean isDead() {
+        return this.dead;
+    }
+
     public void setExpiration(float expiration) {
         this.expiration = expiration;
     }  
@@ -53,6 +59,12 @@ public class LifePart implements EntityPart {
     
     @Override
     public void process(GameData gameData, Entity entity) {
-        
+        if (this.isHit) {
+            this.life -= 1;
+            this.isHit = false;
+        }
+        if (this.life <= 0) {
+            this.dead = true;
+        }
     }
 }

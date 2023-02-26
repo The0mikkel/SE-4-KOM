@@ -62,7 +62,7 @@ public class MovingPart
         this.up = up;
     }
 
-    public float getSpeed(Entity entity) {
+    public float getSpeed() {
         return (float) sqrt(dx * dx + dy * dy);
     }
 
@@ -75,8 +75,8 @@ public class MovingPart
         float dt = gameData.getDelta();
 
         if (!this.startSpeedSet) {
-            dx = (float) (Math.cos(radians) * this.startSpeed) / 2;
-            dy = (float) (Math.sin(radians) * this.startSpeed) / 2;
+            dx = (float) (Math.cos(radians) * this.startSpeed);
+            dy = (float) (Math.sin(radians) * this.startSpeed);
             this.startSpeedSet = true;
         }
 

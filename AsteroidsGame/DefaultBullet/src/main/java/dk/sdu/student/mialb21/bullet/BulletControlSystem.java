@@ -1,8 +1,7 @@
-package dk.sdu.student.mialb21.defaultenemy;
+package dk.sdu.student.mialb21.bullet;
 
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
-import dk.sdu.student.mialb21.common.data.GameKeys;
 import dk.sdu.student.mialb21.common.data.World;
 import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
@@ -24,7 +23,7 @@ public class BulletControlSystem implements IEntityProcessingService {
 
             updateShape(bullet);
 
-            if (lifePart.getExpiration() <= 0) {
+            if (lifePart.getExpiration() <= 0 || lifePart.isDead()) {
                 world.removeEntity(bullet);
             }
         }
@@ -38,11 +37,17 @@ public class BulletControlSystem implements IEntityProcessingService {
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
 
-        shapeX[0] = (float) ((x + Math.cos(radians))*2);
-        shapeY[0] = (float) ((y + Math.sin(radians))*2);
+        shapeX[0] = (float) (x + Math.cos(radians) * 1);
+        shapeY[0] = (float) (y + Math.sin(radians) * 1);
 
-        shapeX[1] = (float) ((x - Math.cos(radians))*2);
-        shapeY[1] = (float) ((y - Math.sin(radians))*2);
+        shapeX[1] = (float) (x + Math.cos(radians) * 0);
+        shapeY[1] = (float) (y + Math.sin(radians) * 0);
+
+        shapeX[2] = (float) (x + Math.cos(radians) * 2);
+        shapeY[2] = (float) (y + Math.sin(radians) * 2);
+
+        shapeX[3] = (float) (x + Math.cos(radians) * -2);
+        shapeY[3] = (float) (y + Math.sin(radians) * -2);
 
         entity.setShapeX(shapeX);
         entity.setShapeY(shapeY);
