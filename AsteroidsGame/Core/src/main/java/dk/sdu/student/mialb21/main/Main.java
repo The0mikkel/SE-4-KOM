@@ -13,7 +13,7 @@ public class Main {
 		cfg.width = 1500;
 		cfg.height = 1000;
 		cfg.useGL30 = false;
-		cfg.resizable = false;
+		cfg.resizable = true;
 		
 		new LwjglApplication(new Game(), cfg);
 		

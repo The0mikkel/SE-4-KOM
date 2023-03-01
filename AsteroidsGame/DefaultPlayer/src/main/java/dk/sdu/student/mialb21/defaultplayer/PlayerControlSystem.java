@@ -8,7 +8,10 @@ import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
+import dk.sdu.student.mialb21.common.services.IBulletCreator;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
+import dk.sdu.student.mialb21.common.util.SPILocator;
+import java.util.Collection;
 
 public class PlayerControlSystem implements IEntityProcessingService {
     @Override
@@ -29,6 +32,13 @@ public class PlayerControlSystem implements IEntityProcessingService {
             lifePart.process(gameData, player);
 
             shootingPart.setShooting(gameData.getKeys().isDown(GameKeys.SPACE));
+            if (shootingPart.getShooting()) {
+                Collection<IBulletCreator> bulletPlugins = SPILocator.locateAll(IBulletCreator.class);
+
+                for (IBulletCreator bulletPlugin : bulletPlugins) {
+                    world.addEntity(bulletPlugin.create(player, gameData));
+                }
+            }
 
             if (lifePart.isDead()) {
                 world.removeEntity(player);

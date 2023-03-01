@@ -3,13 +3,15 @@ package dk.sdu.student.mialb21.enemy;
 import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
-import dk.sdu.student.mialb21.common.data.GameKeys;
 import dk.sdu.student.mialb21.common.data.World;
 import dk.sdu.student.mialb21.common.data.entityparts.LifePart;
 import dk.sdu.student.mialb21.common.data.entityparts.MovingPart;
 import dk.sdu.student.mialb21.common.data.entityparts.PositionPart;
 import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
+import dk.sdu.student.mialb21.common.services.IBulletCreator;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
+import dk.sdu.student.mialb21.common.util.SPILocator;
+import java.util.Collection;
 
 public class EnemyControlSystem implements IEntityProcessingService {
 
@@ -44,6 +46,13 @@ public class EnemyControlSystem implements IEntityProcessingService {
             lifePart.process(gameData, enemy);
 
             shootingPart.setShooting(MathUtils.random(0f,1f) > 0.99f);
+            if (shootingPart.getShooting()) {
+                Collection<IBulletCreator> bulletPlugins = SPILocator.locateAll(IBulletCreator.class);
+
+                for (IBulletCreator bulletPlugin : bulletPlugins) {
+                    world.addEntity(bulletPlugin.create(enemy, gameData));
+                }
+            }
 
             if (lifePart.isDead()) {
                 world.removeEntity(enemy);

@@ -5,30 +5,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
-import dk.sdu.student.mialb21.asteroid.AsteroidControlSystem;
-import dk.sdu.student.mialb21.asteroid.AsteroidPlugin;
-import dk.sdu.student.mialb21.bullet.BulletControlSystem;
-import dk.sdu.student.mialb21.bullet.BulletPlugin;
-import dk.sdu.student.mialb21.collision.CollisionDetector;
 import dk.sdu.student.mialb21.common.data.Color;
-import dk.sdu.student.mialb21.common.data.entityparts.ShootingPart;
 import dk.sdu.student.mialb21.common.services.IPostEntityProcessingService;
 import dk.sdu.student.mialb21.common.util.SPILocator;
-import dk.sdu.student.mialb21.defaultplayer.PlayerControlSystem;
-import dk.sdu.student.mialb21.defaultplayer.PlayerPlugin;
-import dk.sdu.student.mialb21.enemy.EnemyControlSystem;
-import dk.sdu.student.mialb21.enemy.EnemyPlugin;
 import dk.sdu.student.mialb21.managers.GameInputProcessor;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.World;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
 import dk.sdu.student.mialb21.common.services.IGamePluginService;
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Game
         implements ApplicationListener {
@@ -37,9 +23,6 @@ public class Game
     private ShapeRenderer sr;
 
     private final GameData gameData = new GameData();
-    private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
-    private List<IPostEntityProcessingService> entityPostProcessors = new ArrayList<>();
-    private List<IGamePluginService> entityPlugins = new ArrayList<>();
     private World world = new World();
 
     @Override
@@ -57,6 +40,11 @@ public class Game
         Gdx.input.setInputProcessor(
             new GameInputProcessor(gameData)
         );
+
+        // Create initial objects
+        for (IGamePluginService gamePlugin : getPluginServices()) {
+            gamePlugin.start(gameData, world);
+        }
     }
 
     @Override
@@ -76,24 +64,7 @@ public class Game
     }
 
     private void update() {
-        // Bullet
-//        for (Entity entity : world.getEntities()) {
-//            try {
-//                ShootingPart shootingPart = entity.getPart(ShootingPart.class);
-//
-//                if (shootingPart.getShooting()) {
-//                    IGamePluginService bulletPlugin = new BulletPlugin(
-//                            entity
-//                    );
-//                    entityPlugins.add(bulletPlugin);
-//                    bulletPlugin.start(gameData, world);
-//                }
-//            } catch (NullPointerException error) {
-//                // Part does not shoot
-//            }
-//        }
-
-        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
+                for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
             entityProcessorService.process(gameData, world);
         }
         for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
