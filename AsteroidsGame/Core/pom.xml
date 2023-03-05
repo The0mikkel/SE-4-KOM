@@ -69,6 +69,31 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>dk.sdu.student.mialb21</groupId>
+            <artifactId>DefaultPlayer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.student.mialb21</groupId>
+            <artifactId>Asteroid</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.student.mialb21</groupId>
+            <artifactId>Collision</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.student.mialb21</groupId>
+            <artifactId>DefaultBullet</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.student.mialb21</groupId>
+            <artifactId>DefaultEnemy</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 </project>
