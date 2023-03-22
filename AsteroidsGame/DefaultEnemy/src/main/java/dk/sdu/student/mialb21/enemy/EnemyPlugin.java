@@ -12,18 +12,15 @@ import dk.sdu.student.mialb21.common.services.IGamePluginService;
 
 public class EnemyPlugin implements IGamePluginService {
 
-    private Entity enemy;
-
     public EnemyPlugin() {
 
     }
 
     @Override
     public void start(GameData gameData, World world) {
-
-        // Add entities to the world
-        enemy = createEnemyShip(gameData);
-        world.addEntity(enemy);
+        for (int i = 0; i < this.getRandomNumber(2, 8); i++) {
+            world.addEntity(this.createEnemyShip(gameData));
+        }
     }
 
     /**
@@ -63,7 +60,9 @@ public class EnemyPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(enemy);
+        for (Entity enemy : world.getEntities(Enemy.class)) {
+            world.removeEntity(enemy);
+        }
     }
 
     private float getRandomNumber(float min, float max) {
