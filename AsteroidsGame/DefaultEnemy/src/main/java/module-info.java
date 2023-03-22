@@ -1,0 +1,8 @@
+import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
+import dk.sdu.student.mialb21.common.services.IGamePluginService;
+
+module DefaultEnemy {
+    requires Common;
+    provides IGamePluginService with dk.sdu.student.mialb21.enemy.EnemyPlugin;
+    provides IEntityProcessingService with dk.sdu.student.mialb21.enemy.EnemyControlSystem;
+}
