@@ -1,21 +1,18 @@
 package dk.sdu.student.mialb21.main;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 public class Main {
 	
 	public static void main(String[] args) {
 		
-		LwjglApplicationConfiguration cfg =
-			new LwjglApplicationConfiguration();
-		cfg.title = "Asteroids";
-		cfg.width = 1500;
-		cfg.height = 1000;
-		cfg.useGL30 = false;
-		cfg.resizable = true;
-		
-		new LwjglApplication(new Game(), cfg);
+		Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
+		cfg.setTitle("Asteroids");
+		cfg.setWindowSizeLimits(1500, 1000, 4000, 4000);
+		cfg.setResizable(true);
+
+		new Lwjgl3Application(new Game(), cfg);
 		
 	}
 	

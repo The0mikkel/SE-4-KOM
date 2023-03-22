@@ -27,7 +27,6 @@ public class Game
 
     @Override
     public void create() {
-
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 

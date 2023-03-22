@@ -1,6 +1,5 @@
 package dk.sdu.student.mialb21.enemy;
 
-import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.student.mialb21.common.data.Color;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
@@ -42,9 +41,9 @@ public class EnemyPlugin implements IGamePluginService {
         float acceleration = 200;
         float maxSpeed = 300;
         float rotationSpeed = 5;
-        float x = MathUtils.random(0, gameData.getDisplayWidth());
-        float y = MathUtils.random(0, gameData.getDisplayHeight());
-        float radians = MathUtils.random(0f, (float) (2 * Math.PI));
+        float x = this.getRandomNumber(0, gameData.getDisplayWidth());
+        float y = this.getRandomNumber(0, gameData.getDisplayHeight());
+        float radians = this.getRandomNumber(0f, (float) (2 * Math.PI));
 
         Entity enemyShip = new Enemy();
 
@@ -65,5 +64,9 @@ public class EnemyPlugin implements IGamePluginService {
     public void stop(GameData gameData, World world) {
         // Remove entities
         world.removeEntity(enemy);
+    }
+
+    private float getRandomNumber(float min, float max) {
+        return (float) ((Math.random() * (max - min)) + min);
     }
 }
