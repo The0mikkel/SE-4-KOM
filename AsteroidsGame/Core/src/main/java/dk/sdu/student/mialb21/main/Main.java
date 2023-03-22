@@ -1,5 +1,6 @@
 package dk.sdu.student.mialb21.main;
 
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -9,7 +10,8 @@ public class Main {
 		
 		Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
 		cfg.setTitle("Asteroids");
-		cfg.setWindowSizeLimits(1500, 1000, 4000, 4000);
+		int size = 1000;
+		cfg.setWindowSizeLimits(size,size,size * 2,size * 2);
 		cfg.setResizable(true);
 
 		new Lwjgl3Application(new Game(), cfg);
