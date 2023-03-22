@@ -1,6 +1,6 @@
 package dk.sdu.student.mialb21.bullet;
 
-import com.badlogic.gdx.math.MathUtils;
+import java.lang.Math;
 import dk.sdu.student.mialb21.common.data.Color;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
@@ -51,9 +51,9 @@ public class BulletPlugin implements IGamePluginService, IBulletCreator {
 
         bullet.setRadius(1);
 
-        float bx = (float) MathUtils.cos(radians) * this.shooter.getRadius() * bullet.getRadius();
+        float bx = (float) Math.cos(radians) * this.shooter.getRadius() * bullet.getRadius();
         float x = bx + shooterPosition.getX();
-        float by = (float) MathUtils.sin(radians) * this.shooter.getRadius() * bullet.getRadius();
+        float by = (float) Math.sin(radians) * this.shooter.getRadius() * bullet.getRadius();
         float y = by + shooterPosition.getY();
         float shootSpeed = 350 + (shooterMovement.getSpeed());
 

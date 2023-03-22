@@ -1,6 +1,6 @@
 package dk.sdu.student.mialb21.asteroid;
 
-import com.badlogic.gdx.math.MathUtils;
+import java.lang.Math;
 import dk.sdu.student.mialb21.common.data.Color;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
@@ -35,7 +35,7 @@ public class AsteroidPlugin implements IGamePluginService {
 
     @Override
     public void start(GameData gameData, World world) {
-        for (int i = 0; i < MathUtils.random(5, 20); i++) {
+        for (int i = 0; i < Math.floor(Math.random() * 15) + 5; i++) {
             asteroid = createInitialAsteroid(gameData);
             world.addEntity(asteroid);
         }
@@ -52,11 +52,11 @@ public class AsteroidPlugin implements IGamePluginService {
      * @return Asteroid entity, to be added to the world
      */
     public Entity createInitialAsteroid(GameData gameData) {
-        float x = MathUtils.random(gameData.getDisplayWidth());
-        float y = MathUtils.random(gameData.getDisplayHeight());
-        float radians = MathUtils.random(0, (float) (2 * Math.PI));
+        float x = (float) (Math.random() * gameData.getDisplayWidth());
+        float y = (float) (Math.random() * gameData.getDisplayHeight());
+        float radians = (float) (Math.random() * (2 * Math.PI));
 
-        float startSpeed = MathUtils.random(25f, 75f);
+        float startSpeed = (float) (Math.random() * 50f) + 25f;
 
         Entity asteroid = new Asteroid();
         this.setAsteroidRadius(asteroid);
@@ -98,12 +98,13 @@ public class AsteroidPlugin implements IGamePluginService {
 
             float radians = positionPart.getRadians() + split;
 
-            float bx = (float) MathUtils.cos(radians) * asteroid.getRadius();
+            float bx = (float) Math.cos(radians) * asteroid.getRadius();
             float x = bx + positionPart.getX();
-            float by = (float) MathUtils.sin(radians) * asteroid.getRadius();
+            float by = (float) Math.sin(radians) * asteroid.getRadius();
             float y = by + positionPart.getY();
 
-            float startSpeed = MathUtils.random(movingPart.getSpeed(), 75f);
+            float currentSpeed = movingPart.getSpeed();
+            float startSpeed = (float) ((Math.random() * (75f - currentSpeed)) + currentSpeed);
 
             this.buildAsteroid(gameData, splittetAsteroid, x, y, radians, startSpeed);
 
