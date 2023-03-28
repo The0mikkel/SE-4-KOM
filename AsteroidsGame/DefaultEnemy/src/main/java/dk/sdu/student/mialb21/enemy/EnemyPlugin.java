@@ -18,7 +18,7 @@ public class EnemyPlugin implements IGamePluginService {
 
     @Override
     public void start(GameData gameData, World world) {
-        for (int i = 0; i < this.getRandomNumber(1, 1); i++) {
+        for (int i = 0; i < this.getRandomNumber(2, 5); i++) {
             world.addEntity(this.createEnemyShip(gameData));
         }
     }
