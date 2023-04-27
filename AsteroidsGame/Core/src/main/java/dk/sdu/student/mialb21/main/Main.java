@@ -1,8 +1,10 @@
 package dk.sdu.student.mialb21.main;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
 	
@@ -16,8 +18,11 @@ public class Main {
 		cfg.setWindowedMode(width, height);
 		cfg.setResizable(false);
 
-		new Lwjgl3Application(new Game(), cfg);
-		
+		AnnotationConfigApplicationContext application = new AnnotationConfigApplicationContext();
+		application.scan("dk.sdu.student.mialb21.main");
+		application.refresh();
+
+		new Lwjgl3Application((ApplicationListener) application.getBean("game"), cfg);
 	}
 	
 }

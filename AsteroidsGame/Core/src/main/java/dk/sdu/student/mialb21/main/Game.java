@@ -8,22 +8,35 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.student.mialb21.common.data.Color;
 import dk.sdu.student.mialb21.common.services.IPostEntityProcessingService;
 import dk.sdu.student.mialb21.common.util.SPILocator;
+import dk.sdu.student.mialb21.injectors.IProcessor;
+import dk.sdu.student.mialb21.injectors.PluginInjection;
 import dk.sdu.student.mialb21.managers.GameInputProcessor;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.World;
 import dk.sdu.student.mialb21.common.services.IEntityProcessingService;
-import dk.sdu.student.mialb21.common.services.IGamePluginService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 
+@Component("game")
 public class Game
         implements ApplicationListener {
+
+    private AnnotationConfigApplicationContext injectors;
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
 
     private final GameData gameData = new GameData();
     private World world = new World();
+
+    public Game() {
+        this.injectors = new AnnotationConfigApplicationContext();
+        this.injectors.scan("dk.sdu.student.mialb21.injectors");
+        this.injectors.refresh();
+    }
 
     @Override
     public void create() {
@@ -40,10 +53,7 @@ public class Game
             new GameInputProcessor(gameData)
         );
 
-        // Create initial objects
-        for (IGamePluginService gamePlugin : getPluginServices()) {
-            gamePlugin.start(gameData, world);
-        }
+        ((PluginInjection) injectors.getBean("pluginInjector")).startPlugins(gameData, world);
     }
 
     @Override
@@ -71,12 +81,8 @@ public class Game
     }
 
     private void update() {
-                for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
-            entityProcessorService.process(gameData, world);
-        }
-        for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
-            postEntityProcessorService.process(gameData, world);
-        }
+        ((IProcessor) injectors.getBean("processorInjector")).process(gameData, world);
+        ((IProcessor) injectors.getBean("postProcessorInjector")).process(gameData, world);
     }
 
     private void draw() {
@@ -116,10 +122,6 @@ public class Game
 
     @Override
     public void dispose() {
-    }
-
-    private Collection<? extends IGamePluginService> getPluginServices() {
-        return SPILocator.locateAll(IGamePluginService.class);
     }
 
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
