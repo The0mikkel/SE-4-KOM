@@ -12,6 +12,6 @@ module Core {
     uses IEntityProcessingService;
     uses IPostEntityProcessingService;
 
-    exports dk.sdu.student.mialb21.injectors;
+    exports dk.sdu.student.mialb21.components;
     exports dk.sdu.student.mialb21.main;
 }

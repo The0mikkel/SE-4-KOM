@@ -1,4 +1,4 @@
-package dk.sdu.student.mialb21.injectors;
+package dk.sdu.student.mialb21.components;
 
 import dk.sdu.student.mialb21.common.data.GameData;
 import dk.sdu.student.mialb21.common.data.World;

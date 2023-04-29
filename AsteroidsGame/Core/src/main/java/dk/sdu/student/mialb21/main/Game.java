@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.student.mialb21.common.data.Color;
 import dk.sdu.student.mialb21.common.services.IPostEntityProcessingService;
 import dk.sdu.student.mialb21.common.util.SPILocator;
-import dk.sdu.student.mialb21.injectors.IProcessor;
-import dk.sdu.student.mialb21.injectors.PluginInjection;
+import dk.sdu.student.mialb21.components.IProcessor;
+import dk.sdu.student.mialb21.components.PluginInjection;
 import dk.sdu.student.mialb21.managers.GameInputProcessor;
 import dk.sdu.student.mialb21.common.data.Entity;
 import dk.sdu.student.mialb21.common.data.GameData;
@@ -24,7 +24,7 @@ import java.util.Collection;
 public class Game
         implements ApplicationListener {
 
-    private AnnotationConfigApplicationContext injectors;
+    private AnnotationConfigApplicationContext components;
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
@@ -33,9 +33,9 @@ public class Game
     private World world = new World();
 
     public Game() {
-        this.injectors = new AnnotationConfigApplicationContext();
-        this.injectors.scan("dk.sdu.student.mialb21.injectors");
-        this.injectors.refresh();
+        this.components = new AnnotationConfigApplicationContext();
+        this.components.scan("dk.sdu.student.mialb21.components");
+        this.components.refresh();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Game
             new GameInputProcessor(gameData)
         );
 
-        ((PluginInjection) injectors.getBean("pluginInjector")).startPlugins(gameData, world);
+        ((PluginInjection) components.getBean("pluginInjector")).startPlugins(gameData, world);
     }
 
     @Override
@@ -81,8 +81,8 @@ public class Game
     }
 
     private void update() {
-        ((IProcessor) injectors.getBean("processorInjector")).process(gameData, world);
-        ((IProcessor) injectors.getBean("postProcessorInjector")).process(gameData, world);
+        ((IProcessor) components.getBean("processorInjector")).process(gameData, world);
+        ((IProcessor) components.getBean("postProcessorInjector")).process(gameData, world);
     }
 
     private void draw() {
