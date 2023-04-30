@@ -4,21 +4,13 @@
     <parent>
         <groupId>dk.sdu.student.mialb21</groupId>
         <artifactId>AsteroidsGame</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>DefaultEnemy</artifactId>
     <packaging>jar</packaging>
     <name>DefaultEnemy</name>
+    <version>1.0.0</version>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>

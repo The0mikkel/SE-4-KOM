@@ -4,20 +4,12 @@
     <parent>
         <groupId>dk.sdu.student.mialb21</groupId>
         <artifactId>AsteroidsGame</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>Core</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
-
     <name>Core</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <spring.version>6.0.8</spring.version>
-    </properties>
+    <version>1.0.0</version>
 
     <repositories>
         <repository>

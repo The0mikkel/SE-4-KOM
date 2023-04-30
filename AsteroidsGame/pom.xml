@@ -3,9 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dk.sdu.student.mialb21</groupId>
     <artifactId>AsteroidsGame</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>Asteroids</name>
+
     <modules>
         <module>Asteroid</module>
         <module>Collision</module>
@@ -15,22 +16,20 @@
         <module>DefaultEnemy</module>
         <module>DefaultPlayer</module>
     </modules>
+
     <properties>
         <java>java</java> <!-- This was missing, and is required for ${java} to work in executable -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>dk.sdu.mmmi.cbse</groupId>
-                <artifactId>shadedlibgdx</artifactId>
-                <version>1.0.1-SNAPSHOT</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <spring.version>6.0.8</spring.version>
+
+        <surefire.version>3.0.0</surefire.version>
+        <junit.jupiter.version>5.9.1</junit.jupiter.version>
+        <junit.platform.version>1.9.1</junit.platform.version>
+        <mockito.core.version>5.3.1</mockito.core.version>
+    </properties>
 
     <build>
         <plugins>
