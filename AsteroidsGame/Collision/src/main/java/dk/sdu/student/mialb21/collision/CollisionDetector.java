@@ -17,7 +17,6 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 }
 
                 LifePart hitterEntityLifePart = hitterEntity.getPart(LifePart.class);
-                LifePart collidedEntityLifePart = hitterEntity.getPart(LifePart.class);
 
                 if (
                         hitterEntityLifePart.getLife() > 0
@@ -44,7 +43,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
         );
     }
 
-    boolean collides(float hitterX, float hitterY, float hitterR, float collidedX, float collidedY, float collidedR) {
+    public boolean collides(float hitterX, float hitterY, float hitterR, float collidedX, float collidedY, float collidedR) {
         float dx = hitterX - collidedX;
         float dy = hitterY - collidedY;
         float distanceBetween = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
