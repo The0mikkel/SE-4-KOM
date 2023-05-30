@@ -6,7 +6,7 @@ import dk.sdu.student.mialb21.common.data.World;
 
 public interface IBulletCreator {
     /**
-     * Start the plugin.
+     * Create and spawn a bullet, based on an entity as the shooter.
      * <br />
      * Pre-condition: Game running and shooter wants bullet to appear.<br />
      * Post-condition: Bullet entity that is ready to be added to the game world.
